@@ -3,3 +3,14 @@
 ################################################################################
 
 /Sitio/Bin
+/Sitio/DAL/bin/Debug
+/Sitio/DAL/obj/Debug
+/Sitio/Model/bin/Debug
+/Sitio/Model/obj/Debug
+/Sitio/packages
+/Sitio/ServicioREST/bin
+/Sitio/ServicioREST/obj/Debug
+/Sitio/WebApplication1/bin
+/Sitio/WebApplication1/obj/Debug
+/UnitTest/bin/Debug
+/UnitTest/obj/Debug
