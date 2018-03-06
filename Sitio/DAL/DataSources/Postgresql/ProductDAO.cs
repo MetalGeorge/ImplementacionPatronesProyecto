@@ -14,7 +14,7 @@ namespace DAL.DataSources.Postgresql
         public List<Product> ListaProductos()
         {
             List<Product> result = new List<Product>();
-            NpgsqlConnection connection = new NpgsqlConnection("Server=jepdata.c72m7dovjxgj.us-east-1.rds.amazonaws.com;Port=5432;User Id=root;Password=Metalis123;Database=DemoPatrones;MAXPOOLSIZE=100;");
+            NpgsqlConnection connection = new NpgsqlConnection("Server=jepdata.c72m7dovjxgj.us-east-1.rds.amazonaws.com;Port=5432;User Id=root;Password=[ContraseñaSegura];Database=DemoPatrones;MAXPOOLSIZE=100;");
             connection.Open();
             NpgsqlCommand cmd = new NpgsqlCommand("Select id, product_name, product_description, units_in_stock, product_category_id from product limit 10", connection);
             NpgsqlDataReader reader = cmd.ExecuteReader();
@@ -36,7 +36,7 @@ namespace DAL.DataSources.Postgresql
         public List<Model.ViewModel.ProductPrice> ListaProductosConPrecio()
         {
             List<Model.ViewModel.ProductPrice> result = new List<Model.ViewModel.ProductPrice>();
-            NpgsqlConnection connection = new NpgsqlConnection("Server=jepdata.c72m7dovjxgj.us-east-1.rds.amazonaws.com;Port=5432;User Id=root;Password=Metalis123;Database=DemoPatrones;MAXPOOLSIZE=100;");
+            NpgsqlConnection connection = new NpgsqlConnection("Server=jepdata.c72m7dovjxgj.us-east-1.rds.amazonaws.com;Port=5432;User Id=root;Password=[ContraseñaSegura];Database=DemoPatrones;MAXPOOLSIZE=100;");
             connection.Open();
             NpgsqlCommand cmd = new NpgsqlCommand(@"SELECT p.id, product_name, product_description, 
                                                     product_category_id,
