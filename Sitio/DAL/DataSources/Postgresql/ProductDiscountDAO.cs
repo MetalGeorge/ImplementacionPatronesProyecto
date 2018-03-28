@@ -37,13 +37,13 @@ namespace DAL.DataSources.Postgresql
             return result;
         }
 
-        int? IProductDiscountData.ObtieneDescuentoPorCodigo(string couponCode, int id)
+        int? IProductDiscountData.ObtieneDescuentoPorCodigo(string codigoCupon, int id)
         {
             Product_discount result = new Product_discount();
             NpgsqlConnection connection = new NpgsqlConnection("Server=jepdata.c72m7dovjxgj.us-east-1.rds.amazonaws.com;Port=5432;User Id=root;Password=[ContraseñaSegura];Database=DemoPatrones;MAXPOOLSIZE=100;");
             connection.Open();
             NpgsqlCommand cmd = new NpgsqlCommand(string.Format(@"SELECT id, product_id, discount_value, date_created, 
-                                                    valid_until, coupon_code FROM product_discount WHERE coupon_code='{0}' AND product_id = {1} LIMIT 1", couponCode, id), connection);
+                                                    valid_until, coupon_code FROM product_discount WHERE coupon_code='{0}' AND product_id = {1} LIMIT 1", codigoCupon, id), connection);
             NpgsqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
@@ -62,13 +62,13 @@ namespace DAL.DataSources.Postgresql
             return result.Discount_Value;
         }
 
-        int? IProductDiscountData.ObtieneDescuentoPorCodigo(string couponCode)
+        int? IProductDiscountData.ObtieneDescuentoPorCodigo(string codigoCupon)
         {
             Product_discount result = new Product_discount();
             NpgsqlConnection connection = new NpgsqlConnection("Server=jepdata.c72m7dovjxgj.us-east-1.rds.amazonaws.com;Port=5432;User Id=root;Password=[ContraseñaSegura];Database=DemoPatrones;MAXPOOLSIZE=100;");
             connection.Open();
             NpgsqlCommand cmd = new NpgsqlCommand(string.Format(@"SELECT id, product_id, discount_value, date_created, 
-                                                    valid_until, coupon_code FROM product_discount WHERE coupon_code='{0}' LIMIT 1", couponCode), connection);
+                                                    valid_until, coupon_code FROM product_discount WHERE coupon_code='{0}' LIMIT 1", codigoCupon), connection);
             NpgsqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
@@ -115,6 +115,31 @@ namespace DAL.DataSources.Postgresql
             }
 
             return result.Discount_Value;
+        }
+
+        Product_discount IProductDiscountData.ObtieneDescuentoProducto(int producto_id, string codigoCupon)
+        {
+            Product_discount result = new Product_discount();
+            NpgsqlConnection connection = new NpgsqlConnection("Server=jepdata.c72m7dovjxgj.us-east-1.rds.amazonaws.com;Port=5432;User Id=root;Password=[ContraseñaSegura];Database=DemoPatrones;MAXPOOLSIZE=100;");
+            connection.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand(string.Format(@"SELECT id, product_id, discount_value, date_created, 
+                                                    valid_until, coupon_code FROM product_discount WHERE coupon_code='{0}' AND product_id = {1} LIMIT 1", codigoCupon, producto_id), connection);
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                result = new Product_discount()
+                {
+                    Id = reader.GetInt32(0),
+                    Product_Id = reader.GetInt32(1),
+                    Discount_Value = reader.GetInt32(2),
+                    Date_Created = reader.GetDateTime(3),
+                    Valid_Until = reader.GetDateTime(4),
+                    Coupon_Code = reader.GetString(5)
+                };
+            }
+
+            return result;
         }
 
         public int ConfirmaCompraCupon(string codigoCupon)

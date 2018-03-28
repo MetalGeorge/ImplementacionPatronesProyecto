@@ -15,5 +15,6 @@ namespace Model
         public string Coupon_Code{ get; set; }
         public DateTime Date_Created { get; set; }
         public DateTime Valid_Until { get; set; }
+        public bool IsUsed { get; set; }
     }
 }

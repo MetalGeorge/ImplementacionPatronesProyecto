@@ -13,5 +13,6 @@ namespace DAL.Interfaces
         int? ObtieneDescuentoPorCodigo(string codigoCupon);
         int? ObtieneDescuentoPorFechas(int producto_id, DateTime fechaInicio, DateTime fechaFin);
         int ConfirmaCompraCupon(string codigoCupon);
+        Model.Product_discount ObtieneDescuentoProducto(int id, string codigoCupon);
     }
 }

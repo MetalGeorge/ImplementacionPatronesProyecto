@@ -30,6 +30,14 @@ namespace DAL
         {
             return this.strategy.ObtieneDescuentoPorFechas(producto_id, fechaInicio, fechaFin);
         }
+        public Model.Product_discount ObtieneDescuentoProducto(int id, string codigoCupon)
+        {
+            return this.strategy.ObtieneDescuentoProducto(id, codigoCupon);
+        }
+        public int ConfirmaCompraCupon(string codigoCupon)
+        {
+            return this.strategy.ConfirmaCompraCupon(codigoCupon);
+        }
 
     }
 }

@@ -175,6 +175,10 @@
     <Compile Include="Clases\Command\ObtenerDescuentoCuponCommand.cs" />
     <Compile Include="Clases\Command\ObtenerDescuentoFechasCommand.cs" />
     <Compile Include="Clases\Command\ControladorObtieneDescuentoInvoker.cs" />
+    <Compile Include="Clases\State\ActivoEstado.cs" />
+    <Compile Include="Clases\State\Cupon.cs" />
+    <Compile Include="Clases\State\IEstado.cs" />
+    <Compile Include="Clases\State\UtilizadoEstado.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />

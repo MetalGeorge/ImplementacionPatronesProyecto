@@ -47,8 +47,11 @@ namespace ServicioREST.Controllers
         }
 
         // POST: api/ProductDiscount
-        public void Post([FromBody]string value)
+        public void Post([FromBody]string codigoCupon, int producto_id)
         {
+            Clases.State.Cupon cupon = new Clases.State.Cupon(producto_id, codigoCupon);
+            var cuponRecuperado = cupon.Recuperar();
+            cupon.Aplicar();
         }
 
         // PUT: api/ProductDiscount/5
