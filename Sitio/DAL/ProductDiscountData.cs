@@ -26,5 +26,10 @@ namespace DAL
         {
             return this.strategy.ObtieneDescuentoPorCodigo(cupon);
         }
+        public int? ObtieneDescuentoPorFechas(int producto_id, DateTime fechaInicio, DateTime fechaFin)
+        {
+            return this.strategy.ObtieneDescuentoPorFechas(producto_id, fechaInicio, fechaFin);
+        }
+
     }
 }

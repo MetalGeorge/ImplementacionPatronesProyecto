@@ -15,16 +15,35 @@ namespace ServicioREST.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/ProductDiscount/5
-        public string Get(int id)
+        // GET: api/ProductDiscount/5/
+        public int? Get(int id, DateTime fechaInicio, DateTime fechaFin)
         {
-            return "value";
+            Clases.Command.DescuentoPorFechas descuentoFechas = new Clases.Command.DescuentoPorFechas();
+            /// Asignamos los valores necesarios
+            descuentoFechas.FechaInicioDescuento = fechaInicio;
+            descuentoFechas.FechaFinDescuento= fechaFin;
+            descuentoFechas.Producto_id = id;
+
+            Clases.Command.IDescuentosCommand descuentoCuponCmd = new Clases.Command.ObtenerDescuentoFechasCommand(descuentoFechas);
+            Clases.Command.IInvoker invoker = new Clases.Command.ControladorObtieneDescuentoInvoker();
+            invoker.SetCommand(descuentoCuponCmd);
+            var result = invoker.Invoke();
+            return result;
         }
 
         // GET: api/ProductDiscount/"coupon"/5
-        public string Get(string coupon, int id)
+        public int? Get(string coupon, int id)
         {
-            return "value";
+            Clases.Command.DescuentoPorCupon descuentoCupon = new Clases.Command.DescuentoPorCupon();
+            /// Asignamos los valores necesarios
+            descuentoCupon.CodigoCupon = coupon;
+            descuentoCupon.Producto_id = id;
+
+            Clases.Command.IDescuentosCommand descuentoCuponCmd = new Clases.Command.ObtenerDescuentoCuponCommand(descuentoCupon);
+            Clases.Command.IInvoker invoker = new Clases.Command.ControladorObtieneDescuentoInvoker();
+            invoker.SetCommand(descuentoCuponCmd);
+            var result = invoker.Invoke();
+            return result;
         }
 
         // POST: api/ProductDiscount

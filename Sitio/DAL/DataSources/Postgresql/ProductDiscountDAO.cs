@@ -87,6 +87,36 @@ namespace DAL.DataSources.Postgresql
             return result.Discount_Value;
         }
 
+        //int? IProductDiscountData.ObtieneDescuentoPorFechas(DateTime fechaInicio, DateTime fechaFin)
+        int? IProductDiscountData.ObtieneDescuentoPorFechas(int producto_id, DateTime fechaInicio, DateTime fechaFin)
+
+        {
+            Product_discount result = new Product_discount();
+            NpgsqlConnection connection = new NpgsqlConnection("Server=jepdata.c72m7dovjxgj.us-east-1.rds.amazonaws.com;Port=5432;User Id=root;Password=[ContraseñaSegura];Database=DemoPatrones;MAXPOOLSIZE=100;");
+            connection.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand(string.Format(@"SELECT id, product_id, discount_value, date_created, 
+                                                                valid_until, coupon_code 
+                                                                FROM product_discount 
+                                                                WHERE valid_until  BETWEEN '{0}' AND '{1}' 
+                                                                AND product_id = {2} LIMIT 1", fechaInicio, fechaFin, producto_id), connection);
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                result = new Product_discount()
+                {
+                    Id = reader.GetInt32(0),
+                    Product_Id = reader.GetInt32(1),
+                    Discount_Value = reader.GetInt32(2),
+                    Date_Created = reader.GetDateTime(3),
+                    Valid_Until = reader.GetDateTime(4),
+                    Coupon_Code = reader.GetString(5)
+                };
+            }
+
+            return result.Discount_Value;
+        }
+
         public int ConfirmaCompraCupon(string codigoCupon)
         {
             NpgsqlConnection connection = new NpgsqlConnection("Server=jepdata.c72m7dovjxgj.us-east-1.rds.amazonaws.com;Port=5432;User Id=root;Password=[ContraseñaSegura];Database=DemoPatrones;MAXPOOLSIZE=100;");
