@@ -28,6 +28,9 @@ namespace ServicioREST.Clases.ChainOfResponsability
                 {
                     this.getSiguiente().procesar(codigo);
                 }
+                else {
+                    throw new Exception("No existe el cupon que se ha requerido");
+                }
             }
             return result;
         }
